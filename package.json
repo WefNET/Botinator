@@ -1,0 +1,21 @@
+{
+  "name": "wurm-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^8.2.0",
+    "electron-rebuild": "^1.10.1"
+  },
+  "dependencies": {
+    "electron-hotkey": "0.0.1-alpha.1",
+    "electron-settings": "^3.2.0",
+    "mousetrap": "^1.6.5",
+    "robotjs": "^0.6.0"
+  }
+}
