@@ -1,9 +1,12 @@
-const { app, BrowserWindow, ipcMain } = require('electron')
+const { app, BrowserWindow, ipcMain, screen } = require('electron')
 const path = require('path')
+
 
 let win = null;
 
 function createWindow() {
+    
+    
     // Create the browser window.
     win = new BrowserWindow({
         width: 800,
@@ -45,22 +48,61 @@ app.on('activate', () => {
 function openSettingsWindow() {
     const modalPath = path.join('file://', __dirname, '/sub/settings.html')
     console.log(modalPath);
-
-    // win.hide();
+    
+    const { width, height } = screen.getPrimaryDisplay().workAreaSize;
+    
+    win.hide();
 
     let settingsWin = new BrowserWindow({
         frame: false,
-        opacity: 1,
         width: 200,
         height: 400,
+        x: width - 150,
+        y: (height / 2) - 300,
+        alwaysOnTop: true,
+        opacity: 0.8,
         webPreferences: {
             nodeIntegration: true
         }
     })
 
     settingsWin.on('close', () => {
-        // win.show();
+        win.show();
         settingsWin = null;
+        
+    });
+
+    settingsWin.loadURL(modalPath)
+    settingsWin.show()
+
+    // settingsWin.webContents.openDevTools();
+}
+
+function openCrafterWindow() {
+    const modalPath = path.join('file://', __dirname, '/sub/crafter.html')
+    console.log(modalPath);
+    
+    const { width, height } = screen.getPrimaryDisplay().workAreaSize;
+    
+    win.hide();
+
+    let settingsWin = new BrowserWindow({
+        frame: false,
+        width: 200,
+        height: 60,
+        x: 50,
+        y: 0,
+        alwaysOnTop: true,
+        opacity: 0.8,
+        webPreferences: {
+            nodeIntegration: true
+        }
+    })
+
+    settingsWin.on('close', () => {
+        win.show();
+        settingsWin = null;
+        
     });
 
     settingsWin.loadURL(modalPath)
@@ -69,10 +111,13 @@ function openSettingsWindow() {
     settingsWin.webContents.openDevTools();
 }
 
-
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
 
 ipcMain.on('do-settings', () => {
     openSettingsWindow();
+})
+
+ipcMain.on('do-crafter', () => {
+    openCrafterWindow();
 })

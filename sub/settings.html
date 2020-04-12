@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="./../node_modules/bootstrap/dist/css/bootstrap.min.css">
+
 <style>
     body {
         font-family: system, -apple-system, '.SFNSText-Regular', 'SF UI Text', 'Lucida Grande', 'Segoe UI', Ubuntu, Cantarell, sans-serif;
@@ -29,23 +31,35 @@
     window.ipcRenderer = require('electron').ipcRenderer;
 </script>
 
-<h6>Settings</h6>
+<h6>Action Stamina Settings</h6>
 
-<p id="commandText">Interactive Area</p>
+<p id="commandText">...</p>
 
 <p>
-    <button id="btnRested">Set Rested</button>
+    <button id="btnRested" class="btn btn-primary btn-sm">Set Rested</button>
 </p>
 
 <p id="restedSettings">
     Rested Colour: <span id="restedColour"></span> <br />
-    Rested X: <span id="restedX"></span> <br />
-    Rested Y: <span id="restedY"></span> <br />
+    Coords: [<span id="restedX"></span>, <span id="restedY"></span>] <br />
+</p>
+
+<p>
+    <button id="btnAction" class="btn btn-primary btn-sm">Set Action</button>
+</p>
+
+<p id="actionSettings">
+    Action Colour: <span id="actionColour"></span> <br />
+    Coords: [<span id="actionX"></span>, <span id="actionY"></span>] <br />
 </p>
 
 <script type='text/javascript'>
     document.getElementById("btnRested").addEventListener("click", function (e) {
         ipcRenderer.send('do-rested');
+    });
+
+    document.getElementById("btnAction").addEventListener("click", function (e) {
+        ipcRenderer.send('do-action');
     })
 </script>
 

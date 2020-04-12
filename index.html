@@ -5,21 +5,34 @@
     <title>Hello World!</title>
     <!-- https://electronjs.org/docs/tutorial/security#csp-meta-tag -->
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <script type='text/javascript'>
         window.ipcRenderer = require('electron').ipcRenderer;
     </script>
   </head>
   <body>
-    <h1>Hello World!</h1>
-    We are using node <script>document.write(process.versions.node)</script>,
-    Chrome <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.
+    <div class="container">
 
-    <p><button id="btnSettings">Settings</button></p>
+      <h1>Wurm Game Bots</h1>
+      <p class="lead"><i>Grind to your hearts content.</i></p>
+
+      <h3>Basic Crafter</h3>
+      <p>This bot repeats a left mouse click and checks for running action and stamina in order to prevent you from running out.</p>
+
+      <div class="row">
+        <div class="col-4"><button id="btnSettings" type="button" class="btn btn-primary btn-sm">Action Stamina Settings</button></div>
+        <div class="col-4"><button id="btnCrafter" type="button" class="btn btn-primary btn-sm">Run Basic Crafter</button></div>
+        <div class="col-4">.col-4</div>
+      </div>
+    </div>
 
     <script type='text/javascript'>
         document.getElementById("btnSettings").addEventListener("click", function (e) {
             ipcRenderer.send('do-settings');
+        })
+
+        document.getElementById("btnCrafter").addEventListener("click", function (e) {
+            ipcRenderer.send('do-crafter');
         })
     </script>
   </body>
